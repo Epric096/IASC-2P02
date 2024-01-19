@@ -6,10 +6,20 @@
     <!--css-->
     <link rel="stylesheet" href="style.css">
 
+    <!--three.js importmap-->
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://ga.jspm.io/npm:three@0.160.0/build/three.module.js"
+          }
+        }
+        </script>
     <!--three.js scene-->
     <script src="script.js" type="module"></script>
 </head>
 <body>
-    Three.js Basic Scene
+    <h1>Three.js Basic Scene</h1>
+
+    <canvas class="webgl"></canvas>
 </body>
 </html>
