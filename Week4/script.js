@@ -87,6 +87,10 @@ uiObject.play = false
 uiObject.speed= 0.5
 uiObject.distance = 2
 
+uiObject.reset = () =>{
+    uiObject.speed= 0.5
+    uiObject.distance = 2
+}
 // Plane UI
 const planeFOlder = ui.addFolder('Plane')
 
@@ -101,6 +105,7 @@ sphereFolder
     .max(5)
     .step(0.1)
     .name('Height')
+    .listen()
 
 sphereFolder
     .add(uiObject,'play')
@@ -112,6 +117,7 @@ sphereFolder
     .max(5)
     .step(0.1)
     .name('speed')
+    .listen()
 
 sphereFolder
     .add(uiObject, 'distance')
@@ -119,10 +125,15 @@ sphereFolder
     .max(5)
     .step(1)
     .name('distance')
+    .listen()
 
 planeFOlder
     .add(renderer, 'localClippingEnabled')
     .name('Clipping')
+
+sphereFolder
+    .add(uiObject, 'reset')
+    .name('reset')
 
 /********************
  ** ANIMATION LOOP **
