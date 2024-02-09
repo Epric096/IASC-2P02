@@ -90,6 +90,15 @@ torusKnot.position.set(6,1.5,0)
 torusKnot.castShadow = true
 scene.add(torusKnot)
 
+// Sun
+const sunGeometry = new THREE.SphereGeometry()
+const sunMaterial = new THREE.MeshLambertMaterial({
+    emissive: new THREE.Color('orange'),
+    emissiveIntensity: 20
+})
+const sun = new THREE.Mesh(sunGeometry, sunMaterial)
+scene.add(sun)
+
 /************
  ** LIGHTS **
  ************/
@@ -109,6 +118,8 @@ directionalLight.castShadow = true
 directionalLight.shadow.mapSize.width = 1024
 directionalLight.shadow.mapSize.height = 1024
 scene.add(directionalLight)
+
+
 
 // Directional Light Helper
 // const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
@@ -173,6 +184,9 @@ const clock = new THREE.Clock()
     // Update directionalLightHelper
     // directionalLightHelper.update()
 
+    // Update sun position to match directionalLight position
+    sun.position.copy(directionalLight.position)
+    
     // Controls
     controls.update()
 
