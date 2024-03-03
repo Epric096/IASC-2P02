@@ -60,7 +60,7 @@ controls.enableDamping = true
  )
 
  // cavewall
- const caveWallGeometry = new THREE.PlaneGeometry(10,5)
+ const caveWallGeometry = new THREE.PlaneGeometry(20,8)
  const caveWall = new THREE.Mesh(caveWallGeometry,caveMaterial)
  caveWall.rotation.y = Math.PI/2
  caveWall.position.set(-5,0,0)
@@ -68,27 +68,63 @@ controls.enableDamping = true
  scene.add(caveWall)
 
  // barrierWall
-const barrierWallGeometry = new THREE.PlaneGeometry(10,2)
+const barrierWallGeometry = new THREE.PlaneGeometry(20,2)
 const barrierWall = new THREE.Mesh(barrierWallGeometry,caveMaterial)
 barrierWall.rotation.y = Math.PI/2
-barrierWall.position.set(5,-1.5,0)
+barrierWall.position.set(5,-3.5,0)
 scene.add(barrierWall)
 
  // caveFloor
-const caveFloorGeometry = new THREE.PlaneGeometry(10,10)
+const caveFloorGeometry = new THREE.PlaneGeometry(10,20)
 const caveFloor = new THREE.Mesh(caveFloorGeometry,caveMaterial)
 caveFloor.rotation.x = Math.PI/2
-caveFloor.position.set(0,-2.5,0)
+caveFloor.position.set(0,-4,0)
 scene.add(caveFloor)
 
 // Objects
-// TorusKnot
-const torusKnotGeometry = new THREE.TorusKnotGeometry(1,0.2)
-const toruKnotMaterial = new THREE.MeshNormalMaterial()
-const torusKnot = new THREE.Mesh(torusKnotGeometry,toruKnotMaterial)
-torusKnot.position.set(6,1.5,0)
-torusKnot.castShadow = true
-scene.add(torusKnot)
+
+// jet plane
+class CustomSinCurve extends THREE.Curve {
+
+	constructor( scale = 1 ) {
+		super();
+		this.scale = scale;
+	}
+
+	getPoint( t, optionalTarget = new THREE.Vector3() ) {
+
+		const tx = t * 3 - 1.5;
+		const ty = Math.sin( 5 * Math.PI * t );
+		const tz = 0;
+
+		return optionalTarget.set( tx, ty, tz ).multiplyScalar( this.scale );
+	}
+}
+
+const path = new CustomSinCurve( 2 );
+const jetGeometry = new THREE.TubeGeometry( path, 8, 1, 8, false );
+const jetMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const jet = new THREE.Mesh( jetGeometry, jetMaterial );
+jet.castShadow = true
+jet.rotation.y = 20.5
+jet.rotation.x = 23.5
+jet.position.set(20,1,0)
+scene.add( jet );
+
+// bullet
+const fireGeometry = new THREE.ConeGeometry( 0.5, 2, 32 ); 
+const fireMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+const fire1 = new THREE.Mesh(fireGeometry, fireMaterial ); 
+const fire2 = new THREE.Mesh(fireGeometry, fireMaterial ); 
+fire1.rotation.x = 20.5
+fire2.rotation.x = 20.5
+fire1.position.set(20,3.5,-15)
+fire2.position.set(20,-1.5,-40)
+fire1.castShadow = true
+fire2.castShadow = true
+
+scene.add( fire1 );
+scene.add( fire2 );
 
 // Sun
 const sunGeometry = new THREE.SphereGeometry()
@@ -113,66 +149,11 @@ const directionalLight = new THREE.DirectionalLight(
     0.5
 )
 directionalLight.target = caveWall
-directionalLight.position.set(8.6,1.7,0)
+directionalLight.position.set(30,1.7,0)
 directionalLight.castShadow = true
-directionalLight.shadow.mapSize.width = 1024
-directionalLight.shadow.mapSize.height = 1024
+directionalLight.shadow.mapSize.width = 4096
+directionalLight.shadow.mapSize.height = 2048
 scene.add(directionalLight)
-
-
-
-// Directional Light Helper
-// const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
-// scene.add(directionalLightHelper)
-
-/********
- ** UI **
- ********/
-/*
-const ui = new dat.GUI()
-
-// UI Object
-const uiObject = {}
-
-uiObject.reset = () =>
-{
-    directionalLight.position.set(8.6,1.7,0)
-}
-
-//  Directional Light
-const lightPositionFolder = ui.addFolder('Directional Light Position')
-
-lightPositionFolder
-    .add(directionalLight.position, 'x')
-    .min(-10)
-    .max(20)
-    .step(0.1)
-    .listen()
-
-lightPositionFolder
-    .add(directionalLight.position, 'y')
-    .min(-10)
-    .max(10)
-    .step(0.1)
-    .listen()
-
-lightPositionFolder
-    .add(directionalLight.position, 'z')
-    .min(-10)
-    .max(10)
-    .step(0.1)
-    .listen()
-
-lightPositionFolder
-    .add(uiObject,'reset')
-    .name('reset position')
-
-lightPositionFolder
-    .add(torusKnot.position,'x')
-    .min(-5)
-    .max(5)
-    .step(0.1)
-*/
 
 /********************
  ** DOM INTERACTIONS **
@@ -207,7 +188,7 @@ document.querySelector('#continue-reading').onclick = function(){
     domObject.fourthChange = false
 
     // reset directionalLight
-    directionalLight.position.set(8.6,1.7,0)
+    directionalLight.position.set(20,1.7,0)
 }
 
  // first change
@@ -250,7 +231,7 @@ const clock = new THREE.Clock()
 
     // Update sun position to match directionalLight position
     sun.position.copy(directionalLight.position)
-    
+
     // Controls
     controls.update()
 
@@ -263,25 +244,40 @@ const clock = new THREE.Clock()
 
     // part 2
     if(domObject.part ==2){
-        camera.position.set(7,4,13)
+        camera.position.set(40,10,20)
     }
     // first-change
     if(domObject.firstChange){
-        torusKnot.rotation.y = elapsedTime
-        torusKnot.rotation.z = elapsedTime
+        jet.position.z = Math.sin(elapsedTime / 2) * 10
+        if(jet.position.z <= -9){
+            jet.rotation.x = -23.5
+        }
+        else if (jet.position.z >= 9){
+            jet.rotation.x = 23.5
+        }
     }
 
     // second-change
     if(domObject.secondChange){
-        torusKnot.position.y = Math.sin(elapsedTime * 0.5) * 6
+        jet.position.z = Math.sin(elapsedTime * 3) * 10
+        if(jet.position.z <= -9){
+            jet.rotation.x = -23.5
+        }
+        else if (jet.position.z >= 9.5){
+            jet.rotation.x = 23.5
+        }
     }
     // third-change
     if(domObject.thirdChange){
-        torusKnot.position.y = 2
+        jet.position.set(10,1,0)
+        jet.rotation.x = 23.5
+        jet.position.y = Math.sin(elapsedTime /2) * 4
+        fire2.position.z += 0.05
+        fire1.position.z += 0.05
     }
     // fourth-change
     if(domObject.fourthChange){
-        directionalLight.position.y -= elapsedTime * 0.05
+        directionalLight.position.y -= 0.03
     }
     // Renderer
     renderer.render(scene,camera)
