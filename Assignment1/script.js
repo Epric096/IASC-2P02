@@ -161,7 +161,7 @@ scene.add(directionalLight)
 
  // domObject
  const domObject = {
-    part: 0,
+    part: 1,
     firstChange: false,
     secondChange: false,
     thirdChange: false,
@@ -188,12 +188,18 @@ document.querySelector('#continue-reading').onclick = function(){
     domObject.fourthChange = false
 
     // reset directionalLight
-    directionalLight.position.set(20,1.7,0)
+    directionalLight.position.set(30,1.7,0)
+
+    // reset object locations
+    fire1.position.set(20,3.5,-15)
+    fire2.position.set(20,-1.5,-40)
+    jet.position.set(20,1,0)
 }
 
  // first change
  document.querySelector('#first-change').onclick = function(){
     domObject.firstChange = true
+    domObject.secondChange = false
 }
 
  // second change
@@ -222,13 +228,6 @@ const clock = new THREE.Clock()
     // return elapsedTime
     const elapsedTime = clock.getElapsedTime()
 
-    // Animate Objects
-    // torusKnot.rotation.y = elapsedTime
-    // torusKnot.position.z = Math.sin(elapsedTime) * 2
-
-    // Update directionalLightHelper
-    // directionalLightHelper.update()
-
     // Update sun position to match directionalLight position
     sun.position.copy(directionalLight.position)
 
@@ -238,7 +237,7 @@ const clock = new THREE.Clock()
     // DOM INTERACTIONS
     // part 1
     if(domObject.part == 1){
-        camera.position.set(1.1, 0.3, 1.3)
+        camera.position.set(4, 0, 3)
         camera.lookAt(-5,0,1.5)
     }
 
