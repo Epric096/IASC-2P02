@@ -10,32 +10,31 @@ const sizes = {
     aspectRatio: window.innerWidth / window.innerHeight,
 }
 
-let xDistance = 1
+let xDistance = 2
 let meshSize = 1
 
-// mobile
-if (sizes.aspectRatio < 1){
-    let xDistance = 1
-    let meshSize = 1
+// Mobile
+if(sizes.aspectRatio < 1){
+    xDistance = 1
+    meshSize = 1
 }
 
 // Resizing
-window.addEventListener('resize', () => 
-    {
-        // Update Sizes
-        sizes.width = window.innerWidth
-        sizes.height = window.innerHeight
-        sizes.aspectRatio = window.innerWidth / window.innerHeight
+window.addEventListener('resize', () =>
+{
+    // Update Sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+    sizes.aspectRatio = window.innerWidth / window.innerHeight
+    
+    // Update camera
+    camera.aspect = sizes.aspectRatio
+    camera.updateProjectionMatrix()
 
-        // Update camera
-        camera.aspect = sizes.aspectRatio
-        camera.updateProjectionMatrix()
-
-        // Update renderer
-        renderer.setSize(sizes.width, sizes.height)
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio,2))
-    }
-)
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
 /***********
  ** SCENE **
  ***********/
