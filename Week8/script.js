@@ -7,10 +7,10 @@ import * as THREE from "three"
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight,
-    aspectRatio: window.innerWidth / window.innerHeight,
+    aspectRatio: window.innerWidth / window.innerHeight
 }
 
-let xDistance = 2
+let xDistance = 1
 let meshSize = 1
 
 // Mobile
@@ -35,6 +35,7 @@ window.addEventListener('resize', () =>
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
+
 /***********
  ** SCENE **
  ***********/
