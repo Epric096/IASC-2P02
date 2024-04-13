@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Visualization Assignment</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- three.js importmap -->
+    <script type="importmap">
+    {
+        "imports": {
+        "three": "https://ga.jspm.io/npm:three@0.160.0/build/three.module.js",
+        "OrbitControls": "https://ga.jspm.io/npm:three@0.160.0/examples/jsm/controls/OrbitControls.js",
+        "lil-gui": "https://ga.jspm.io/npm:lil-gui@0.19.1/dist/lil-gui.esm.js"
+        }
+    }
+    </script>
+
+    <!-- dataviz 1-->
+    <script src="script.js" type="module"></script>
+
+    <!-- dataviz 2-->
+    <script src="script2.js" type="module"></script>
+
+</head>
+<body>
+    <h1>To Kill A Mockingbird</h1>
+    <h2>ChingKai Huang (Eric)</h2>
+
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu tempor lacus, nec ornare lectus. Proin tincidunt mi at ipsum mattis, ut pharetra risus scelerisque. Nullam ac augue ligula. Sed a interdum ex, eget lobortis lorem. Cras congue nulla quis iaculis faucibus. Vestibulum nulla sapien, tincidunt vitae enim eu, dapibus commodo dolor. Sed ultricies efficitur sapien, non efficitur velit blandit non. Nulla purus nibh, facilisis id fermentum sit amet, tempus a arcu. Donec dignissim purus dolor, at mattis libero lobortis sed. Morbi porttitor eleifend imperdiet. Nulla tristique elementum tellus ullamcorper suscipit. Vestibulum consectetur posuere pulvinar. Sed in venenatis lorem. Aliquam erat volutpat. Cras id lorem sapien.</p>
+
+    <p>Vivamus ultricies arcu vitae velit ornare elementum. Donec aliquam, ligula ut ornare mattis, neque nibh elementum sapien, ac imperdiet magna justo eget leo. Nulla sodales, orci a rhoncus scelerisque, lacus augue finibus mi, id ornare lacus tellus eu dui. Nunc sit amet lacus convallis, volutpat velit id, tincidunt enim. Vestibulum et nisl risus. Curabitur sit amet rhoncus justo. Nam mattis, odio vitae aliquet fringilla, turpis justo vestibulum nisi, vel tristique erat tortor eget sem. Nulla feugiat pellentesque elit et malesuada. In sagittis augue a neque mattis, quis lacinia tortor rutrum. Nulla ex risus, efficitur sed nisi id, suscipit varius mi.</p>
+    
+    <!-- dataviz 1-->
+    <div class="canvas-container">
+        <h2> Stuff in Mockingbird</h2>
+        <!-- <ul>
+            <li id="red">testing</li>
+            <li id="green">testing</li>
+            <li id="blue">testing</li>
+        </ul> -->
+
+        <!-- canvas -->
+        <canvas class="webgl"></canvas>
+        <div id="parent1"></div>
+        <p>Left click and drag to rotate. Right click and drag to move. Scroll to zoom.</p>
+    </div>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut finibus, nisi ut vulputate malesuada, nisi nulla sollicitudin diam, ultricies imperdiet est lacus ut arcu. In at magna eleifend, porta diam eget, mattis dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium condimentum scelerisque. Maecenas consectetur sodales quam non vestibulum. In ac dictum magna. Integer nec eros eu felis interdum tincidunt. Vivamus scelerisque a neque vitae cursus. Etiam dictum odio a dignissim euismod. Aliquam erat volutpat.</p>
+
+    <p>Mauris et massa nec turpis fringilla facilisis eget vel velit. Proin sit amet eros mi. In vestibulum et ligula at vestibulum. Nullam sed tortor scelerisque, pellentesque sem id, faucibus nisi. Donec rutrum rutrum ornare. Fusce non quam tincidunt, tincidunt ex non, sollicitudin tortor. Nullam malesuada tellus eget metus pulvinar, eget consectetur diam hendrerit. Sed vehicula commodo leo nec porta.</p>
+    
+    <!-- dataviz 2 -->
+    <div class="canvas-container">
+        <h2> Stuff in Mockingbird</h2>
+
+        <!-- canvas -->
+        <canvas class="webgl2"></canvas>
+        <div id="parent2"></div>
+        <p>Left click and drag to rotate. Right click and drag to move. Scroll to zoom.</p>
+    </div>
+
+    <p>Donec viverra elementum nibh sit amet viverra. Donec at tempus ipsum. Suspendisse aliquam nunc ut risus egestas, efficitur tempus tellus placerat. Vestibulum lorem lorem, sollicitudin at ante eu, sollicitudin egestas massa. Proin quis varius arcu. Nulla vestibulum consequat justo, quis porttitor enim vestibulum cursus. Curabitur consectetur tellus congue lacinia cursus. Nulla quis magna sodales, suscipit nisi ut, vulputate sapien. Cras nec dapibus urna.</p>
+    
+    
+    
+</body>
+</html>
