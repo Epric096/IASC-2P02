@@ -100,7 +100,7 @@ const uiobj = {
     textArray: [],
     term1: 'bird',
     term2: 'hat',
-    term3: 'broom',
+    term3: 'fox',
     rotateCamera: false
 }
 
@@ -145,7 +145,8 @@ const findTermInParsedText = (term, material) =>
 
 // Load source text
 // https://raw.githubusercontent.com/Edward2k/IMessageAutomatorLinedShrekscript/master/Shrek-Script.txt
-fetch("https://raw.githubusercontent.com/nlowe/EECS2510/master/TreeBenchmarks/Test%20Files/To%20Kill%20a%20Mockingbird%20-%20Harper%20Lee.txt")
+// https://raw.githubusercontent.com/nlowe/EECS2510/master/TreeBenchmarks/Test%20Files/To%20Kill%20a%20Mockingbird%20-%20Harper%20Lee.txt
+fetch("https://raw.githubusercontent.com/monicedy/monicedy.github.io/main/_posts/Prince.txt")
     .then(response => response.text())
     .then(
         (data) =>
