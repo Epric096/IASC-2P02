@@ -29,7 +29,9 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     100
 )
-camera.position.set(0, 0, -20)
+camera.position.set(3, 39, -15)
+camera.rotation.y = 0.29
+
 scene.add(camera)
 
 // Renderer
@@ -56,10 +58,10 @@ scene.add(directionalLight)
  ** MESHES **
  ************/
 
-// Cube Geometry
-const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+// octahedron Geometry
+const octahedronGeometry = new THREE.OctahedronGeometry(0.5, 0)
 
-// Cube Materials
+// octahedron Materials
 const redMaterial = new THREE.MeshStandardMaterial(
     {
         color: new THREE.Color('red')
@@ -76,20 +78,20 @@ const blueMaterial = new THREE.MeshStandardMaterial(
     }
 )
 
-const drawCube = (i, material) =>
+const drawoctahedron = (i, material) =>
 {
-    const cube = new THREE.Mesh(cubeGeometry, material)
-    cube.position.x = (Math.random() - 0.5) * 10
-    cube.position.z = (Math.random() - 0.5) * 10
-    cube.position.y = i + 30
+    const octahedron = new THREE.Mesh(octahedronGeometry, material)
+    octahedron.position.x = (Math.random() - 0.5) * 10
+    octahedron.position.z = (Math.random() - 0.5) * 10
+    octahedron.position.y = i + 10
 
-    cube.rotation.x = Math.random() * 2 * Math.PI
-    cube.rotation.y = Math.random() * 2 * Math.PI
-    cube.rotation.z = Math.random() * 2 * Math.PI
+    octahedron.rotation.x = Math.random() * 2 * Math.PI
+    octahedron.rotation.y = Math.random() * 2 * Math.PI
+    octahedron.rotation.z = Math.random() * 2 * Math.PI
 
-    cube.randomizer = Math.random()
+    octahedron.randomizer = Math.random()
 
-    scene.add(cube)
+    scene.add(octahedron)
 }
 
 /***********************
@@ -100,8 +102,8 @@ const drawCube = (i, material) =>
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'bird',
-    term2: 'hat',
+    term1: 'rose',
+    term2: 'prince',
     term3: 'fox',
     rotateCamera: false,
     starDrop: false
@@ -113,7 +115,7 @@ const parseTextandTerms = () =>
 {
     // strip periods and downcase text
     const parsedText = uiobj.text.replaceAll(".", "").toLowerCase()
-
+    
     // Tokenize text
     uiobj.textArray = parsedText.split(/[^\w']+/)
 
@@ -137,10 +139,10 @@ const findTermInParsedText = (term, material) =>
             // convert i into n, which is a value between 0 and 20
             const n = (100 / uiobj.textArray.length) * i * 0.2
             
-            // call drawCube function 5 times using converted n value
+            // call drawoctahedron function 5 times using converted n value
             for(let a = 0; a < 5; a++)
             {
-                drawCube(n, material)
+                drawoctahedron(n, material)
             }
         }
     }
@@ -169,22 +171,22 @@ const ui = new dat.GUI(
 
 // Interaction Folder
 
-// Cubes Folder
-const cubesFolder = ui.addFolder('Filter Term')
+// octahedrons Folder
+const octahedronsFolder = ui.addFolder('Filter Term')
 
-cubesFolder
+octahedronsFolder
     .add(redMaterial, 'visible')
     .name(`${uiobj.term1}`)
 
-cubesFolder
+octahedronsFolder
     .add(greenMaterial, 'visible')
     .name(`${uiobj.term2}`)
 
-cubesFolder
+octahedronsFolder
     .add(blueMaterial, 'visible')
     .name(`${uiobj.term3}`)
 
-cubesFolder
+octahedronsFolder
     .add(uiobj, 'starDrop')
     .name('Star Drop')
 
@@ -217,6 +219,7 @@ const animation = () =>
     }
     if(uiobj.starDrop)
     {
+        camera.position.set(0,0,20)
         for(let i =0; i < scene.children.length; i++){
             if(scene.children[i].type === "Mesh"){
                 if(scene.children[i].position.y > (100 / uiobj.textArray.length) * i * 0.2)

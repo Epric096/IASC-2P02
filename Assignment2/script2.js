@@ -88,7 +88,7 @@ const drawSphere = (i, material) =>
     sphere.rotation.z = Math.random() * 2 * Math.PI
 
     sphere.randomizer = Math.random()
-    sphere.posRandom = (Math.random() - 0.5) * 10
+    sphere.posRandom = (Math.random() - 0.5) * 7
 
     scene.add(sphere)
 }
@@ -101,9 +101,9 @@ const drawSphere = (i, material) =>
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'bird',
-    term2: 'hat',
-    term3: 'fox',
+    term1: 'star',
+    term2: 'planet',
+    term3: 'airplane',
     rotateCamera: false,
     animateBubbles: false
 }
