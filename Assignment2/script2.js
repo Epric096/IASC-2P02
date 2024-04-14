@@ -88,6 +88,7 @@ const drawSphere = (i, material) =>
     sphere.rotation.z = Math.random() * 2 * Math.PI
 
     sphere.randomizer = Math.random()
+    sphere.posRandom = (Math.random() - 0.5) * 10
 
     scene.add(sphere)
 }
@@ -219,7 +220,9 @@ const animation = () =>
             if(scene.children[i].type === "Mesh"){
                 scene.children[i].scale.x = Math.sin(elapsedTime * scene.children[i].randomizer)
                 scene.children[i].scale.y = Math.sin(elapsedTime * scene.children[i].randomizer)
-                scene.children[i].scale.z = Math.sin(elapsedTime * scene.children[i].randomizer)  
+                scene.children[i].scale.z = Math.sin(elapsedTime * scene.children[i].randomizer)
+                scene.children[i].position.z += Math.sin(elapsedTime * scene.children[i].posRandom) * 0.5 
+                scene.children[i].position.x += Math.cos(elapsedTime * scene.children[i].posRandom) * 0.5
             }
         }
     }

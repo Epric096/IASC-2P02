@@ -81,11 +81,13 @@ const drawCube = (i, material) =>
     const cube = new THREE.Mesh(cubeGeometry, material)
     cube.position.x = (Math.random() - 0.5) * 10
     cube.position.z = (Math.random() - 0.5) * 10
-    cube.position.y = i - 10
+    cube.position.y = i + 30
 
     cube.rotation.x = Math.random() * 2 * Math.PI
     cube.rotation.y = Math.random() * 2 * Math.PI
     cube.rotation.z = Math.random() * 2 * Math.PI
+
+    cube.randomizer = Math.random()
 
     scene.add(cube)
 }
@@ -101,7 +103,8 @@ const uiobj = {
     term1: 'bird',
     term2: 'hat',
     term3: 'fox',
-    rotateCamera: false
+    rotateCamera: false,
+    starDrop: false
 }
 
 // Text Parsers
@@ -181,6 +184,10 @@ cubesFolder
     .add(blueMaterial, 'visible')
     .name(`${uiobj.term3}`)
 
+cubesFolder
+    .add(uiobj, 'starDrop')
+    .name('Star Drop')
+
 // Camera Folder
 const cameraFolder = ui.addFolder('Camera')
 
@@ -206,7 +213,19 @@ const animation = () =>
     if(uiobj.rotateCamera)
     {
         camera.position.x = Math.sin(elapsedTime * 0.2) * 16
-        camera.position.z = Math.cos(elapsedTime * 0.2)  * 16
+        camera.position.z = Math.cos(elapsedTime * 0.2) * 16
+    }
+    if(uiobj.starDrop)
+    {
+        for(let i =0; i < scene.children.length; i++){
+            if(scene.children[i].type === "Mesh"){
+                if(scene.children[i].position.y > (100 / uiobj.textArray.length) * i * 0.2)
+                {
+                    scene.children[i].position.y -= 0.05 * scene.children[i].randomizer;
+                }
+            }
+        }
+
     }
 
     // Renderer
