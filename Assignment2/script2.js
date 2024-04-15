@@ -62,17 +62,17 @@ const sphereGeometry = new THREE.SphereGeometry(0.5)
 // sphere Materials
 const redMaterial = new THREE.MeshStandardMaterial(
     {
-        color: new THREE.Color('red')
+        color: new THREE.Color('yellow')
     }
 )
 const greenMaterial = new THREE.MeshStandardMaterial(
     {
-        color: new THREE.Color('green')
+        color: new THREE.Color('purple')
     }
 )
 const blueMaterial = new THREE.MeshStandardMaterial(
     {
-        color: new THREE.Color('blue')
+        color: new THREE.Color('orange')
     }
 )
 
@@ -184,7 +184,7 @@ spheresFolder
 
 spheresFolder
     .add(uiobj, 'animateBubbles')
-    .name('Animate Bubbles')
+    .name('Animate Sky')
 
 // Camera Folder
 const cameraFolder = ui.addFolder('Camera')
